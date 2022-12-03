@@ -1,0 +1,9 @@
+
+        // char ch = 'U';
+        // int inte = 1000;
+        // string str = "I love you.";
+        // vector<char*> vtr = {&ch, &inte, &str};
+
+        // cout << *((char*)vtr[0]) << endl;
+        // cout << *((int*)vtr[1]) << endl;
+        // cout << *((string*)vtr[2]) << endl;
