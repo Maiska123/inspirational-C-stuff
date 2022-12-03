@@ -1,49 +1,50 @@
-    #include <iostream>
-    #include <string>
-    #include <vector>
-    #include <bits/stdc++.h>    
+#include <iostream>
+using std::cin;
+using std::cout;
 
-    #include "test.h"
-    using namespace std;
+#include <string>
+using std::string;
 
-    string name, another;
-    char asd[20];
+#include <vector>
+using std::begin;
+using std::end;
+using std::vector;
 
-    // auto destruct = [](char a[]) { string s; for (int i = (sizeof(a) / sizeof(int)) - 1; i >= 0; i--){ s.end (a[i]);} return s; };
-    
-    // returns char[] as string
-    /*
-    * returns char[] as string
-    */
-    string cToString(char* a){ string s = a; return s; }
+#include <algorithm>
+using std::count;
+using std::sort;
 
-    char str1[100] = "Journal";
-    char str2[100]= "Dev";
+#include "test.h"
+using namespace std;
 
-    int main()
+vector<string> asd;
+
+int main()
+{
+    asd.push_back("benis");
+    asd.push_back("is");
+    asd.push_back("big");
+    asd.push_back("!");
+
+    for (auto &&i : asd)
     {
-        // output 2 concatted char arrays
-        cout << "Concatenated String:" << endl;
-        strcat(str1, str2);
-        cout << str1 << endl;;
-
-        // test input from user
-        int answer = test1();
-        cout << "name pls: ";
-
-        cin >> name;
-        cout << "\nanotherOne (max len 20¨, end with ;): ";
-
-        cin.getline(asd, (sizeof(asd)),';'); //(recommended)
-
-        // clear output screen
-        clear();
-
-        // print answers
-        cout << "---" << endl;
-        cout << "name is: " << name << endl;
-        cout << "another is: " << cToString(asd) << endl;
-        cout << "answer is: " << answer << endl;
-        printf("answer is again: %i",answer);
-        return 0;
+        cout << i;
     }
+    cout << endl;
+
+    sort(asd.begin(), asd.end());
+
+    for (auto i = begin(asd); i != end(asd); i++)
+    {
+        cout << *i << " ";
+    }
+    cout << endl;
+
+    cout << count(begin(asd[1]), end(asd[1]), 'b') << endl;
+    cout << "end" << endl;
+
+    // test1();
+    // test2();
+
+    return 0;
+}
