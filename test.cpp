@@ -1,7 +1,27 @@
-    #include <iostream>
-    #include <vector>
-    #include <string>
-    #include <bits/stdc++.h>    
+
+#include <bits/stdc++.h>   
+
+#include <iostream>
+using std::cin;
+using std::cout;
+
+#include <string>
+using std::string;
+
+#include <vector>
+using std::begin;
+using std::end;
+using std::vector;
+
+#include <algorithm>
+using std::count;
+using std::sort;
+
+#include "test.hh"
+
+using namespace std;
+
+vector<string> stringVector;
 
     using namespace std;
    
@@ -35,7 +55,7 @@
 
         vector vtr = {&str1, &str2, &str3, &str4, &str5, &str6};
 
-        for (int i=0; i<vtr.size(); i++)
+        for (unsigned int i=0; i<vtr.size(); i++)
             cout << *vtr[i] << ' ';
         cout << endl;
 
@@ -81,4 +101,29 @@ void test2() {
         cout << "another is: " << cToString(asd) << endl;
         cout << "answer is: " << phrase << endl;
         printf("answer is again: %i",answer);
+}
+
+void test3(){
+    stringVector.push_back("benis");
+    stringVector.push_back("is");
+    stringVector.push_back("big");
+    stringVector.push_back("!");
+
+    for (auto &&i : stringVector)
+    {
+        cout << i;
+    }
+    cout << endl;
+
+    sort(stringVector.begin(), stringVector.end());
+
+    for (auto i = begin(stringVector); i != end(stringVector); i++)
+    {
+        cout << *i << " ";
+    }
+    cout << endl;
+
+    cout << count(begin(stringVector[1]), end(stringVector[1]), 'b') << endl;
+    cout << "end" << endl;
+
 }

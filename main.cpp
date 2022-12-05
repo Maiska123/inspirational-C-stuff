@@ -1,50 +1,43 @@
-#include <iostream>
-using std::cin;
-using std::cout;
-
-#include <string>
-using std::string;
-
-#include <vector>
-using std::begin;
-using std::end;
-using std::vector;
-
-#include <algorithm>
-using std::count;
-using std::sort;
-
-#include "test.h"
-using namespace std;
-
-vector<string> asd;
+#include "test.hh"
+#include "classes.hh"
 
 int main()
 {
-    asd.push_back("benis");
-    asd.push_back("is");
-    asd.push_back("big");
-    asd.push_back("!");
+    std::string x, y;
 
-    for (auto &&i : asd)
-    {
-        cout << i;
-    }
-    cout << endl;
+    std::cout << "give me two names: ";
+    std::cin >> x >> y;
+    
+    User user1(x);
+    User user2(y);
+    User user3;
 
-    sort(asd.begin(), asd.end());
+    user1.printInfo();
+    user2.printInfo();
+    user3.printInfo();
 
-    for (auto i = begin(asd); i != end(asd); i++)
-    {
-        cout << *i << " ";
-    }
-    cout << endl;
+    std::cout << "lisätään osallistujat palaveriin..." << std::endl;
+    
+    std::vector<User*> attendees = {&user1, &user2, &user3};
 
-    cout << count(begin(asd[1]), end(asd[1]), 'b') << endl;
-    cout << "end" << endl;
+    Meeting meeting("palaveri",attendees);
+
+    std::cout << "palaverin nimi: " << meeting.name_ << std::endl;
+
+    std::cout << "palaveriin osallistuu: " << meeting.getAttendeeCount() << " henkilöä. " << std::endl << "Henkilöt: " << meeting.getAttendees() << std::endl;
+    
+    Status userState = Pending;
+
+    std::cout << "users state: " << userState << std::endl;
 
     // test1();
     // test2();
+
+    // templates
+    // classes
+    // threading
+    // threadpool
+    // threadworkers
 
     return 0;
 }
