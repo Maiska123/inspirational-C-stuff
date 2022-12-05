@@ -15,6 +15,12 @@
 // using Data = std::unordered_map<std::string, User*>;
 // Data meetings_;
 
+enum Modifier {
+    add,
+    deduct
+};
+
+
 class User {
 
     private:
@@ -27,9 +33,9 @@ class User {
         ~User();
         std::string getName() const;
         void printInfo() const;
+        void points(Modifier modifier, uint32_t amount);
 
 };
-
 
 struct pair_hash {
     template <class T1, class T2>
@@ -64,6 +70,7 @@ struct Meeting {
     std::string name_;
     std::unordered_map<User*, Status> attendees_; 
 
+    void printMeetingInfo() const;
     unsigned int getAttendeeCount() const;
     std::string getAttendees() const;
 };

@@ -21,3 +21,20 @@
         std::cout << "Name: " << User::getName() << "\tScore: "<< User::score_ << std::endl;
         std::cout << std::endl;
     }
+
+    void User::points(Modifier modifier, uint32_t amount){
+        switch(modifier){
+            case Modifier::add:
+                score_ += amount;
+                break;
+            case Modifier::deduct:
+                if (amount > score_){
+                    score_ -= score_;
+                    break;
+                }
+                score_ -= amount;  
+                break;
+            default:
+                break;
+        }
+    }

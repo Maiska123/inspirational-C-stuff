@@ -8,6 +8,8 @@ int main()
     std::cout << "give me two names: ";
     std::cin >> x >> y;
     
+    std::cout << std::endl;
+
     User user1(x);
     User user2(y);
     User user3;
@@ -22,13 +24,28 @@ int main()
 
     Meeting meeting("palaveri",attendees);
 
-    std::cout << "palaverin nimi: " << meeting.name_ << std::endl;
+    meeting.attendees_.find(&user1)->second = Status::Approved;
+    meeting.attendees_.find(&user2)->second = Status::Cancelled;
 
-    std::cout << "palaveriin osallistuu: " << meeting.getAttendeeCount() << " henkilöä. " << std::endl << "Henkilöt: " << meeting.getAttendees() << std::endl;
-    
-    Status userState = Pending;
+    meeting.printMeetingInfo();
 
-    std::cout << "users state: " << userState << std::endl;
+
+    user1.points(Modifier::add, 1000);
+    user2.points(Modifier::deduct, 10); // watch this bitches
+
+
+    user1.printInfo();
+    user2.printInfo();
+    user3.printInfo();
+
+    return 0;
+}
+
+
+
+    // Status userState = Pending;
+
+    // std::cout << "users state: " << userState << std::endl;
 
     // test1();
     // test2();
@@ -38,6 +55,3 @@ int main()
     // threading
     // threadpool
     // threadworkers
-
-    return 0;
-}
