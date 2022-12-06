@@ -18,7 +18,7 @@ using std::count;
 using std::sort;
 
 #include "test.hh"
-#include "classes.hh"
+#include "classes/classes.hh"
 
 using namespace std;
 
