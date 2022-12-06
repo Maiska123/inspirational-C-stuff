@@ -22,10 +22,10 @@ void menu(int ch) {
 
     int i = 0;
     char m[5][30] = {
+        ". Testaa vektoreita",
+        ". Testaa sisäänsyöttöä",
+        ". Testaa järjestyksiä",
         ". Palaverin luonti",
-        ". Menuelementti",
-        ". Menuelementti",
-        ". Menuelementti",
         ". Poistu",
     };
 
@@ -54,6 +54,43 @@ int main()
     clearscr();
     int i = 1;
     int ch = ' ';
+    std::string a = "go";
+    
+    auto op1 = [](std::string&) {
+        std::cout << test1() << std::endl;
+        return true;
+    };
+
+    auto op2 = [](std::string&) {
+        test2();
+        return true;
+    };
+
+    auto op3 = [](std::string&) {
+        test3();
+        return true;
+    };
+
+    auto op4 = [](std::string&) {
+        test4();
+        return true;
+    };
+
+
+
+    using FT = bool(std::string&); //function type alias of lambda operation
+    std::vector<FT*> dataVec; //vector of function pointers
+
+    
+    using FT = bool(std::string&); //function type alias of lambda operation WITHOUT INPUT
+    std::vector<FT*> vec; //vector of function pointers
+
+
+    vec.push_back(op1);
+    vec.push_back(op2);
+    vec.push_back(op3);
+    vec.push_back(op4);
+
 
     while (1)
     {
@@ -70,7 +107,7 @@ int main()
 
             break;
         case 13:
-            if(i != 5){ clearscr(); test4(); }
+            if(i != 5){ clearscr(); vec[i-1](a); }
             else exit(1);
             getch();
             break;
