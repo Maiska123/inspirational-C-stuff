@@ -14,8 +14,18 @@ all: App
 debug:
     make "BUILD=debug"
 
+ifeq ($(BUILD),debug)   
+
 App: main.o
+	@mkdir -p build\Debug
 	g++ main.o test.o meeting.o user.o -o build\Debug\outDebug
+else
+
+App: main.o
+	@mkdir -p build\Release
+	g++ main.o test.o meeting.o user.o -o build\Release\releaseApplication
+endif
+
 
 main.o: test.o meeting.o user.o 
 	g++ $(CFLAGS) -I . -c -std=c++17 -Wall -Wextra -Wpedantic -Werror main.cpp -Iclasses test.cpp .\classes\meeting.cpp .\classes\user.cpp 

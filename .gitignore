@@ -38,3 +38,6 @@ obj/
 build/Debug
 
 .vscode
+
+*.zip
+*.7z
