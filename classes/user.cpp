@@ -16,6 +16,11 @@
         return User::name_;
     }
 
+    int User::getPoints() const{
+        return User::score_;
+    }
+
+
     void User::printInfo() const{
         std::cout << "User info: " << std::endl;
         std::cout << "Name: " << User::getName() << "\tScore: "<< User::score_ << std::endl;
@@ -38,3 +43,16 @@
                 break;
         }
     }
+    
+    bool User::operator<(User const& u) const {
+        return score_ < u.score_;
+    }
+
+    bool User::operator<(int i) const {
+        return score_ < i;
+    }
+
+    bool operator<(int i, User const& u){
+        return i < u.getPoints();
+    }
+
