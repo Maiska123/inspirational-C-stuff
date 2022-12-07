@@ -12,7 +12,7 @@
 
 
 
-// using Data = std::unordered_map<std::string, User*>;
+// using Data = std::unordered_map<std::wstring, User*>;
 // Data meetings_;
 
 enum Modifier {
@@ -20,13 +20,37 @@ enum Modifier {
     deduct
 };
 
+class User {
+
+    private:
+        std::wstring name_;
+        uint32_t score_ = 0;
+    
+    // if you want to give private member access to some function
+    // declare friend
+    // friend bool operator<(int i, User const& u); 
+
+    public:
+        User(std::wstring name);
+        User()=default; // makes "User user1;" possible!
+        ~User();
+        std::wstring getName() const;
+        uint32_t getPoints() const;
+        void printInfo() const;
+        void points(Modifier modifier, uint32_t amount);
+
+        bool operator<(User const& u) const;
+        bool operator<(uint32_t i) const;
+
+};
+bool operator<(uint32_t i, User const& u);
+
+
 // template function
 template <class T>
 T betterOne(T const& t1, T const& t2){
     return t1 < t2 ? t2 : t1;
-}
-
-// template class
+}// template class
 template <class T>
 class Accum{
     private:
@@ -38,35 +62,18 @@ class Accum{
         T GetTotal() const {return total;}
 };
 
-Accum<int> integers(0);
-Accum<std::string> strings("");
-
-
-
-class User {
-
+// template specialization
+// template class with specific class implements (eg. now increments User points)
+template <>
+class Accum<User>{
     private:
-        std::string name_;
-        uint32_t score_ = 0;
-    
-    // if you want to give private member access to some function
-    // declare friend
-    // friend bool operator<(int i, User const& u); 
-
+        uint32_t total;
     public:
-        User(std::string name);
-        User()=default; // makes "User user1;" possible!
-        ~User();
-        std::string getName() const;
-        int getPoints() const;
-        void printInfo() const;
-        void points(Modifier modifier, uint32_t amount);
-
-        bool operator<(User const& u) const;
-        bool operator<(int i) const;
-
+        Accum(uint32_t start): total(start) {};
+        uint32_t operator += (User const& t)
+            {return total = total + t.getPoints();};
+        uint32_t GetTotal() const {return total;}
 };
-bool operator<(int i, User const& u);
 
 struct pair_hash {
     template <class T1, class T2>
@@ -90,7 +97,7 @@ enum Status {
 struct Meeting {
 
 
-    Meeting(std::string name, std::vector<User*> users):name_(name){
+    Meeting(std::wstring name, std::vector<User*> users):name_(name){
         auto addToAttendees = [this](User* n) {
             auto m = std::pair(n,Status::Pending);
             attendees_.insert(m); 
@@ -98,12 +105,12 @@ struct Meeting {
              };
         std::for_each(users.begin(), users.end(), addToAttendees);
     };
-    std::string name_;
+    std::wstring name_;
     std::unordered_map<User*, Status> attendees_; 
 
     void printMeetingInfo() const;
     unsigned int getAttendeeCount() const;
-    std::string getAttendees() const;
+    std::wstring getAttendees() const;
 };
 
 enum class FileError {

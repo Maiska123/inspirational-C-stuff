@@ -2,7 +2,7 @@
 #include <algorithm>
 // using namespace User;
 
-    User::User(std::string name)
+    User::User(std::wstring name)
     :name_(name)
     {
         // empty constructor
@@ -12,19 +12,19 @@
         // for each meeting delete me
     }
 
-    std::string User::getName() const{
+    std::wstring User::getName() const{
         return User::name_;
     }
 
-    int User::getPoints() const{
+    uint32_t User::getPoints() const{
         return User::score_;
     }
 
 
     void User::printInfo() const{
-        std::cout << "User info: " << std::endl;
-        std::cout << "Name: " << User::getName() << "\tScore: "<< User::score_ << std::endl;
-        std::cout << std::endl;
+        std::wcout << "User info: " << std::endl;
+        std::wcout << "Name: " << User::getName() << "\tScore: "<< User::score_ << std::endl;
+        std::wcout << std::endl;
     }
 
     void User::points(Modifier modifier, uint32_t amount){
@@ -48,11 +48,11 @@
         return score_ < u.score_;
     }
 
-    bool User::operator<(int i) const {
+    bool User::operator<(uint32_t i) const {
         return score_ < i;
     }
 
-    bool operator<(int i, User const& u){
+    bool operator<(uint32_t i, User const& u){
         return i < u.getPoints();
     }
 

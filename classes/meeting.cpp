@@ -3,17 +3,17 @@
 #include <sstream>
 
     void Meeting::printMeetingInfo() const {
-        std::cout << "\nPalaverin nimi: " << name_ << std::endl;
+        std::wcout << "\nPalaverin nimi: " << name_ << std::endl;
 
-        std::cout << "\nPalaveriin osallistuu: " << getAttendeeCount() << " henkilöä. " << std::endl << "Henkilöt: " << getAttendees() << std::endl << std::endl;
+        std::wcout << "\nPalaveriin osallistuu: " << getAttendeeCount() << " henkilöä. " << std::endl << "Henkilöt: " << getAttendees() << std::endl << std::endl;
     }
 
     unsigned int Meeting::getAttendeeCount() const {
         return Meeting::attendees_.size();
     }
 
-    std::string Meeting::getAttendees() const {  
-        std::stringstream attendeesString;
+    std::wstring Meeting::getAttendees() const {  
+        std::wstringstream attendeesString;
 
         std::for_each(Meeting::attendees_.begin(), 
                         Meeting::attendees_.end(), 
