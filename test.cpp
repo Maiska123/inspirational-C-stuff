@@ -5,6 +5,10 @@
 using std::wcin;
 using std::wcout;
 
+
+#include <fcntl.h>
+#include <io.h>
+
 #define UNICODE 1
 #include <windows.h>
 
@@ -27,27 +31,27 @@ using namespace std;
 
 vector<std::wstring> stringVector;
 
-    using namespace std;
-   
-
-   
-    std::wstring name, another;
-    wchar_t asd[20];
-
-    // auto destruct = [](wchar_t a[]) { std::wstring s; for (int i = (sizeof(a) / sizeof(int)) - 1; i >= 0; i--){ s.end (a[i]);} return s; };
-    
-    // returns wchar_t[] as std::wstring
-    /*
-    * returns wchar_t[] as std::wstring
-    */
-    std::wstring cToString(wchar_t* a){ std::wstring s = a; return s; }
-
-    wchar_t str1[100] = L"Journal";
-    wchar_t str2[100]= L"Dev";
-    wstring phrase;
+using namespace std;
 
 
-   void clear() {
+
+std::wstring name = L"ä", another = L"ö";
+wchar_t asd[20];
+
+// auto destruct = [](wchar_t a[]) { std::wstring s; for (int i = (sizeof(a) / sizeof(int)) - 1; i >= 0; i--){ s.end (a[i]);} return s; };
+
+// returns wchar_t[] as std::wstring
+/*
+* returns wchar_t[] as std::wstring
+*/
+std::wstring cToString(wchar_t* a){ std::wstring s = a; return s; }
+
+wchar_t str1[100] = L"Journal";
+wchar_t str2[100]= L"Dev";
+wstring phrase;
+
+
+void clear() {
     // CSI[2J clears screen, CSI[H moves the cursor to top-left corner
     // std::wcout << "\x1B[2J\x1B[H";
         
@@ -88,24 +92,34 @@ vector<std::wstring> stringVector;
 }
 
 
-    int test1()
-    {
-        std::wstring str1 = L"aaa", str2 = L"bbb", str3 = L"ccc", str4 = L"ddd", str5 = L"eee", str6 = L"fff";
+int test1()
+{
+    std::wstring str1 = L"aaa", str2 = L"bbb", str3 = L"ccc", str4 = L"ddd", str5 = L"eee", str6 = L"fff";
 
-        vector vtr = {&str1, &str2, &str3, &str4, &str5, &str6};
+    vector vtr = {&str1, &str2, &str3, &str4, &str5, &str6};
 
-        for (unsigned int i=0; i<vtr.size(); i++)
-            std::wcout << *vtr[i] << ' ';
-        std::wcout << endl;
+    for (unsigned int i=0; i<vtr.size(); i++)
+        std::wcout << *vtr[i] << ' ';
+    std::wcout << endl;
 
-        for ( auto &it : vtr)
-            std::wcout << *it << ' ';
-        std::wcout << endl;
+    for ( auto &it : vtr)
+        std::wcout << *it << ' ';
+    std::wcout << endl;
 
-        return 1;
-    }
+    return 1;
+}
 
 void test2() {
+    
+    std::setlocale(LC_ALL, ""); // for C and C++ where synced with stdio
+    std::locale::global(std::locale("")); // for C++
+    SetConsoleOutputCP( 65001 );
+    _setmode(_fileno(stdout), _O_U16TEXT);
+    std::cout.imbue(std::locale(""));
+    std::wcout.imbue(std::locale(""));
+    std::wcin.imbue(std::locale(""));
+
+        _setmode(_fileno(stdout), _O_U16TEXT);
           // output 2 concatted wchar_t arrays
         std::wcout << "Concatenated std::wstring:" << endl;
         wcscat(str1, str2);
@@ -134,11 +148,24 @@ void test2() {
 
         clear();
 
+if( phrase.length() > 1 )
+{
+    std::wofstream outputFile( "C:\\temp\\randomtxt.txt" );
+    if( outputFile )
+    {
+        outputFile << 99 << L'\t' << phrase << L'\n'; // write some delimited numbers
+        std::vector< wchar_t > buf;
+        // write some data into buf
+        outputFile.write( &buf[0], buf.size() ); // write binary to the output stream
+        std::wcout << L"Kirjoitettiin ääkköisä tiedostoon." << std::endl;
+
+    }
+}
         // print answers
-        std::wcout << "---" << std::endl;
-        std::wcout << "name is: " << name << std::endl;
-        std::wcout << "another is: " << cToString(asd) << std::endl;
-        std::wcout << "answer is: " << phrase << std::endl;
+        std::wcout << L"---" << std::endl;
+        std::wcout << L"name is: " << name << std::endl;
+        std::wcout << L"another is: " << cToString(asd) << std::endl;
+        std::wcout << L"answer is: " << phrase << std::endl;
         printf("answer is again: %i",answer);
 }
 
@@ -168,6 +195,15 @@ void test3(){
 }
 
 void test4() {
+    
+    std::setlocale(LC_ALL, ""); // for C and C++ where synced with stdio
+    std::locale::global(std::locale("")); // for C++
+    SetConsoleOutputCP( 65001 );
+    _setmode(_fileno(stdout), _O_U16TEXT);
+    std::cout.imbue(std::locale(""));
+    std::wcout.imbue(std::locale(""));
+    std::wcin.imbue(std::locale(""));
+
     std::wstring x, y;
 
     std::wcout << "give me two names: ";
